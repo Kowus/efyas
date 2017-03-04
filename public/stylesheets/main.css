@@ -1,0 +1,112 @@
+body {
+	font-family:"Lato Hairline",Lato;
+	color :#000;
+	width:100%;
+}
+.navbar-inverse{background-color:#000;border-color:#080808}
+.head{
+	margin:0;
+	width:100%;
+	padding: 70px 0 0;
+	background-color:#080808;
+	background-image:url("../images/head-bg.jpg");
+	background-attachment:fixed;
+	background-repeat:no-repeat;
+	background-size:cover;
+	height:100vh;
+}
+.landing-header {
+	color:white;
+	position:absolute;
+	top :20vh;
+	padding-left:10px;
+}
+.landing-header h1 {
+	text-indent:10px;
+	font-weight:bold;
+	letter-spacing:5px;
+	font-size:3em;
+}
+.landing-header p{
+	font-weight:bold;
+	text-indent:50px;
+}
+
+
+.signup{
+	padding:0 25px 20px 0;
+	position:absolute;
+	right :5%;
+	bottom:0;
+	background-color :rgba(0,0,0,0.3);
+	overflow:hidden;
+	border-top-left-radius:20px;
+}
+.signup .fset {
+	margin-left:20px;
+}
+.form-control{margin-bottom:5px;}
+.signup .signup-header {
+	margin-top:0;
+	padding-left:10px;
+	color:white;
+	width:112.5%;
+	background-color:black;
+	line-height: 2em;
+}
+
+.section-head{
+	line-height:2em;
+	padding:10px 0;
+	text-align:center;
+	background-color:black;
+	color:white;
+	height:21vh;
+}
+.section-head h1{
+}
+.section-content{
+	padding:20px 20px 0;
+	color:black;
+	background-color:#fff;
+}
+.section-content .about-message{
+	text-align:left;
+	padding :10px;
+	width:95%;
+	margin-left:auto;
+	margin-right:auto;
+}
+.service-item {
+	width:80%;
+	/*Todo: let the centering be on smaller displays*/
+	margin-left:auto;
+	margin-right:auto;
+	background-color:rgba(255,255,255,0.1);
+	margin-bottom: 30px;
+	padding:5px 0;
+	/*border: 4px solid rgba(0,0,0,0.3);*/
+	border :4px solid black;
+	box-shadow: 5px 5px 5px 5px #ccc;
+}
+.service-item i {
+	padding:10px;
+}
+.service-item p{
+	padding:10px;
+}
+input{
+	font-weight:900;
+}
+input:invalid{
+background-color:#fff;
+}
+.form-control:valid{
+	background-color:rgba(0,50,0,0.3);
+	color:white;
+}
+input:focus{
+	background-color:rgba(0,0,0,0.6);
+	color:white;
+	font-weight:bold;
+}
