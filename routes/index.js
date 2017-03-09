@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 		}
 		else {
 			console.log("loaded restaurantss");
-			res.render('index', { title: 'easy-eat', rests:results });
+			res.render('index', { title: 'easy-eat &#174;', rests:results });
 		}
 	});
   
