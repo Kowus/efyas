@@ -1,14 +1,15 @@
-<form class="form-group" method="post" action="/create">
+<form class="form-group col-md-6" method="post" action="/restaurants/add/create">
 	<fieldset class="form-group">
-		<input class="form-control" type="text" name="name" id="name" required>
+		<input class="form-control" type="text" name="name" id="name" required placeholder="Restaurant Name">
 	</fieldset>
 	<fieldset class="form-group">
-		<input class="form-control" type="text" name="locDes" id="locDes" required>
+		<input class="form-control" type="text" name="locDes" id="locDes" required placeholder="Location Description">
 	</fieldset>
 	<fieldset class="form-group">
-		<input class="form-control" name="itemName" id="itemName" required>
+		<input class="form-control" type="text" name="itemName" id="itemName" required placeholder="Item Name">
 	</fieldset>
 	<fieldset class="form-group">
-		<input class="form-control" name="itemPrice" id="itemPrice" required>
+		<input class="form-control" type="number" name="itemPrice" id="itemPrice" required placeholder="Item Price">
 	</fieldset>
+	<input type="submit" class="btn btn-default" value="Submit">
 </form>
