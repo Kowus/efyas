@@ -59,9 +59,9 @@
 									{{#with this.item}}
 									<small class="pull-right">${{this.0.price}}</small>{{/with}}
 									</p>
-									<p class="">{{this.name}}</p>
-									<small class="text-lowercase">{{this.location.description}}</small>
-								
+									<p><small class="text-success pull-left" style="text-blink:200">available at</small><br> <span class="text-danger">{{this.name}}<br></span>
+									<small class="text-lowercase text-muted">{{this.location.description}}</small>
+									</p>
 								</div>
 							</div>
 								{{/each}}
