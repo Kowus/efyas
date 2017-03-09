@@ -32,6 +32,10 @@ var restaurantSchema = new Schema({
 			type:     Number,
 			required: true
 		}
+		/*id: {
+			type: Schema.Types.ObjectId
+		},
+		price:{type: Number}*/
 	}]
 });
 
