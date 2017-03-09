@@ -55,10 +55,12 @@
 							{{#each rests}}
 							<div class="col-lg-3 col-md-3">
 								<div class="service-item">
-									<p class="text-capitalize text-primary">{{this.item.name}}</p>
-									
-									<h4 class="text-capitalize text-primary">Will your anchor hold</h4>
-									<p class="text-muted">In the storms of life.. when sobolo loses its taste, alewa falls to the ground, all hope is lost</p>
+									<p class="text-capitalize text-primary">{{this.item.0.name}}
+									{{#with this.item}}
+									<small class="pull-right">${{this.0.price}}</small>{{/with}}
+									</p>
+									<p class="">{{this.name}}</p>
+									<small class="text-lowercase">{{this.location.description}}</small>
 								
 								</div>
 							</div>
