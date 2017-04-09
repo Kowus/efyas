@@ -110,11 +110,92 @@ input:focus{
 	color:white;
 	font-weight:bold;
 }
-.mainHead{
-	color:#f5f5f5;
-	background-color:#333;
-	width:80%;
+
+textarea:focus{
+	background-color:rgba(0,0,0,0.6);
+	color:white;
+	font-weight:bold;
+}
+.cont-form{
+	background-color:#080808;
+	height:23vh;
+}
+
+
+
+.contact-form{
+	background-color:rgba(0,0,0,0.5);
+	height:inherit;
+}
+
+.map{
 	margin:0;
-	margin-left:auto;
-	margin-right:auto;
+	width:100%;
+	background-color:#080808;
+	background-image:url("../images/head-bg.jpg");
+	background-attachment:fixed;
+	background-repeat:no-repeat;
+	background-size:cover;
+	height:53vh;
+}
+.map2{
+	background-image:url("../images/footer.jpg");
+	background-attachment:scroll;
+	height:35vh;
+}
+.con-sub:hover{
+	background-color:rgba(0,0,0,0.5);
+	color :#fff;
+}
+/*
+.contact-form input:hover{
+	background-color:rgba(0,0,0,0.5);
+	color :#fff;
+}
+.contact-form textarea:hover{
+	background-color:rgba(0,0,0,0.5);
+	color :#fff;
+}*/
+
+.footer-content{
+	background-color:rgba(0,0,0,0.94);
+	height:inherit;
+	color :rgba(255,255,255,0.6);
+}
+.footer-content .social{
+	font-size:2em;
+}
+.fa-instagram {
+	color:white;
+}
+.fa-instagram:hover{
+	opacity:0.5;
+}
+
+.cont-img img{
+	width:200px;
+	height:300px;
+	object-fit:cover;
+}
+
+
+
+@media screen and (max-width:1024px){
+	.section-head{
+		padding:20px 0 35px;
+		height :150px;
+	}
+	.cont-img{
+		display :none;
+	}
+	.footer-content{
+		font-size:0.7em;
+	}
+	.map{
+		height:450px;
+	}
+	.map2{
+		height:300px;
+	}
+
 }

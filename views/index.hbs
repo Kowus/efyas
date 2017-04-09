@@ -1,12 +1,41 @@
 
-		
+<div class="container-fluid head">
+	<div class="row">
+		<div class="col-lg-4 text-left landing-header">
+			<h1>{{{title}}}</h1>
+			<p class="lead">Moto here!!</p>
+		</div>
+		<div class="signup">
+			<h3 class="signup-header">Signup</h3>
+			<form>
+				<fieldset class="form-group form-inline fset">
+					<input class="form-control" type="text" placeholder="First Name" id="firstName" name="firstName" required autofocus>
+					<input class="form-control" type="text" placeholder="Last Name" id="lastName" name="lastName" required>
+				</fieldset>
+				<fieldset class="form-group form-inline fset">
+					<input class="form-control" type="email" placeholder="Email Address" id="email" name="email" required>
+				</fieldset>
+				<fieldset class="form-group form-inline fset">
+					<input class="form-control" type="password" placeholder="password" id="password" name="password" required>
+					<input class="form-control" type="password" placeholder="confirm password" id="cpassword" name="cpassword" required>
+				</fieldset>
+				<fieldset class="form-group form-inline fset">
+					<input class="btn btn-block btn-default btn-success submit" id="submit" type="submit" value="Sign Up">
+				</fieldset>
+			</form>
+		</div>
+	
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /.container -->
 		
 		<!-- Page Content -->
 		
 		<section class="about" id="about">
 			<div class="container-fluid">
 				<div class="row text-center">
-					<header class="jumbotron mainHead">
+					<header class="section-head">
 						<h1>{{{title}}}</h1>
 						<p>Is this a treasure hunt?</p>
 					</header>
@@ -32,5 +61,43 @@
 			</div>
 			<!-- /.container -->
 		</section>
-		
-		
+
+
+<section class="featured" id="featured"></section>
+
+<section class="contact">
+	<div class="container-fluid">
+		<div class="row text-center">
+			<header class="section-head cont-form">
+				<h1>Be atomic. </h1>
+				<p>Private deaths visualizes most happinesses?</p>
+			</header>
+			<div>
+				<div class="map"  id="contact">
+					<article class="section-content col-lg-12 contact-form">
+						<form method="post" class="form-group col-lg-6" action="">
+							<fieldset class="form-group">
+								<input class="form-control" type="text" name="name" placeholder="Name" id="name" required autofocus>
+							</fieldset>
+							<fieldset class="form-group">
+								<input class="form-group form-control" type="email" name="mail" placeholder="Email Address" id="mail" required>
+								<input class="form-group form-control" type="text" name="subject" placeholder="Subject" id="subject" required>
+							</fieldset>
+							<fieldset class="form-group">
+								<textarea class="form-control" rows="5" name="message" placeholder="Message" id="message" required></textarea>
+							</fieldset>
+							<input class="btn btn-default pull-right con-sub" type="submit" value="Submit">
+						</form>
+						<figure class="col-lg-3 cont-img col-lg-push-1">
+							<img class="img-responsive img-thumbnail" src="images/light.jpg">
+							<figcaption>
+								<span class="carousel-caption" style="color:#fff">The density is an ultimate monkey. Not zion or over there, shape the solitude.</span>
+							</figcaption>
+						</figure>
+					
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
