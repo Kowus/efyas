@@ -157,6 +157,7 @@ textarea:focus{
 	color :#fff;
 }*/
 
+.footer{background-color:#000;padding-bottom:20px;}
 .footer-content{
 	background-color:rgba(0,0,0,0.94);
 	height:inherit;
