@@ -96,7 +96,7 @@ body {
 	padding:10px;
 }
 input{
-	font-weight:900;
+	font-weight:normal;
 }
 input:invalid{
 background-color:#fff;
