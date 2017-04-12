@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Restaurant = require('../models/restaurants.model');
 var Food = require('../models/foods');
+var stormpath = require('express-stormpath');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -16,13 +17,13 @@ router.get('/', function (req, res, next) {
 	});
 });
 
-router.get('/add', function (req, res, next) {
+router.get('/add', stormpath.authenticationRequired, function (req, res, next) {
 	res.render('add', {
 		title: 'Add an entry'
 	});
 });
 
-router.post('/add/create', function (req, res, next) {
+router.post('/add/create',stormpath.authenticationRequired, function (req, res, next) {
 	var resdets = req.body;
 	var newRestaurant = new Restaurant({
 		name:     resdets.name,
