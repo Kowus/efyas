@@ -1,0 +1,9 @@
+<div class="gallery">
+	<img class="img-thumbnail img-responsive center-block" width="250px" height="250px" ng-show="product.images.length"
+	     style="object-fit: cover" ng-src="{{product.images[gallery.current]}}"/>
+	<ul class="list-inline thumbs img-thumbnails clearfix" style="width: 50%; margin-left: auto; margin-right: auto">
+		<li class="small pull-left thumbnail" ng-repeat="image in product.images">
+			<img ng-src="{{image}}" ng-click="gallery.setCurrent(product.images.indexOf(image))" width="50px"/>
+		</li>
+	</ul>
+</div>

@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var stormpath = require('express-stormpath');
 
-mongoose.connect(process.env.MONGODB_URI);
-// mongoose.connect('mongodb://localhost')
+// mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb://localhost')
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('connected', function () {
@@ -27,6 +27,7 @@ process.on('SIGINT', function() {
 
 var index = require('./routes/index');
 var restaurants = require('./routes/restaurants');
+var users = require('./routes/users');
 
 var app = express();
 
@@ -48,6 +49,7 @@ app.on('stormpath.ready', function () {
 
 app.use('/', index);
 app.use('/restaurants', restaurants);
+app.use('/users',stormpath.authenticationRequired, users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
