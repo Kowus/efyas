@@ -10,10 +10,9 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+require('newrelic');
 
-
-// mongoose.connect(process.env.MONGODB_URI);
-mongoose.connect('mongodb://localhost/easy-eat');
+mongoose.connect(process.env.MONGODB_URI);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('connected', function () {
