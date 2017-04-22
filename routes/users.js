@@ -19,18 +19,19 @@ router.get('/login', function (req, res, next) {
 });
 
 router.post('/register', function (req, res, next) {
-	var name = req.body.name;
 	var email = req.body.email;
-	var card = req.body.card;
+	var firstname = req.body.firstname;
+	var lastname = req.body.lastname;
 	var sex = req.body.sex;
 	var phone = req.body.phone;
-	var address = req.body.address;
 	var username = req.body.username;
 	var password = req.body.password+'a';
 	var password2 = req.body.password2+'a';
 	var account_type = req.body.account_type;
 
 	//Validation
+	req.checkBody('firstname', 'First Name is required').notEmpty();
+	req.checkBody('lastname', 'Last Name is required').notEmpty();
 	req.checkBody('email', 'Email is required').notEmpty();
 	req.checkBody('email', 'Email not valid').isEmail();
 	req.checkBody('username', 'Username is required').notEmpty();
@@ -48,12 +49,11 @@ router.post('/register', function (req, res, next) {
 	}else
 	{
 		var newUser = new User({
-			name: name,
+			firstname:firstname,
+			lastname:lastname,
 			email: email,
 			sex: sex,
 			phone: phone,
-			address: address,
-			card: card,
 			username: username,
 			password: password,
 			account_type: account_type

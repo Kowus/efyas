@@ -9,8 +9,8 @@ var UserSchema = new Schema({
         unique: true,
         required: true
     },
-    firstname: String,
-    lastname:String,
+    firstname: {type:String,required:true},
+    lastname:{type:String,required:true},
     sex: String,
     email: {
         type: String,
