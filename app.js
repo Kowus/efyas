@@ -1,3 +1,4 @@
+require('newrelic');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -10,7 +11,7 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-require('newrelic');
+
 
 mongoose.connect(process.env.MONGODB_URI);
 var db = mongoose.connection;
