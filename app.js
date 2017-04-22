@@ -5,10 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var stormpath = require('express-stormpath');
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 
 // mongoose.connect(process.env.MONGODB_URI);
-mongoose.connect('mongodb://localhost')
+mongoose.connect('mongodb://localhost/easy-eat');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('connected', function () {
@@ -35,28 +40,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.use(stormpath.init(app, {
-    web: {
-        login: {
-            enabled: true,
-            nextUri: '/users/dashboard'
-        }, register: {
-            enabled: true,
-            nextUri: '/login',
-            form:{
-                fields:{
-                    username:{
-                        enabled:true,
-                        label: "username",
-                        placeholder: "username",
-                        required: true,
-                        type: "text"
-                    }
-                }
-            }
-        }
-    }
-}));
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -64,13 +47,49 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.on('stormpath.ready', function () {
-    console.log('Stormpath Ready!');
+
+// Session
+app.use(session({
+	secret: process.env.PASSPORT_SESSION_SECRET,
+	saveUninitialized: true,
+	resave: true
+}));
+
+//Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(expressValidator({
+	errorFormatter: function (param, msg, value) {
+		var namespace = param.split('.'),
+			root = namespace.shift(),
+			formParam = root;
+
+		while(namespace.length) {
+			formParam += '[' + namespace.shift() + ']';
+		}
+		return {
+			param: formParam,
+			msg: msg,
+			value: value
+		}
+	}
+}));
+// Connect flash
+app.use(flash());
+
+//Global vars
+app.use(function (req, res, next) {
+	res.locals.success_msg = req.flash('success_msg');
+	res.locals.error_msg = req.flash('error_msg');
+	res.locals.error = req.flash('error');
+	res.locals.user = req.user || null;
+	next();
 });
 
 app.use('/', index);
 app.use('/restaurants', restaurants);
-app.use('/users', stormpath.authenticationRequired, users);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

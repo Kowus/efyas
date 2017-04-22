@@ -1,0 +1,33 @@
+<style>
+    .jumbotron {
+        background-color: #fff;
+    }
+
+    .form-control {
+        border: 2px solid black;
+    }
+</style>
+
+<div class="container head" style="padding: 10vh 0 0 0;width: 100%;overflow-x: hidden">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            {{#if errors}}
+                {{#each errors}}
+                    <div class="alert alert-danger">{{msg}}</div>
+                {{/each}}
+            {{/if}}
+            <form class="jumbotron" method="post" action="/users/login" style="padding-top: 10vh;padding-bottom: 10vh;">
+                <h3 class="modal-header text-left">Account Login</h3>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username" style="background-color: #fff;color: #000" autofocus required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password" style="background-color: #fff;color: #000" required>
+                </div>
+                <button type="submit" class="btn btn-success" style="width: 100%">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

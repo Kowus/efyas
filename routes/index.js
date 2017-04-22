@@ -12,7 +12,24 @@ router.get('/', function(req, res, next) {
 			res.render('index', { title: 'easy-eat &#174;', rests:results });
 		}
 	});
-  
 });
+
+
+router.get('/dashboard', ensureAuthenticated, function (req, res, next) {
+	res.render('user_dash', {
+		title: 'easy-eat &#174;'
+	});
+});
+
+
+function ensureAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	} else {
+		res.redirect('/users/login');
+	}
+}
+
+
 
 module.exports = router;

@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="/javascripts/app/angular.min.js"></script>
 		<script type="text/javascript" src="/javascripts/app/app.js"></script>
 		<script type="text/javascript" src="/javascripts/app/products.js"></script>
-		
+
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -36,16 +36,25 @@
 				</div>
 				<div class="collapse navbar-collapse pull-right" id="navlinks">
 					<ul class="nav navbar-nav">
-						<li><a>About</a></li>
-						<li><a>About</a></li>
-						<li><a>About</a></li>
+                        {{#if user}}
+                            <li role="presentation" class="text-capitalize"><a>{{user.username}}</a></li>
+                            <li role="presentation"><a href="/dashboard">Dashboard</a></li>
+                            <li role="presentation"><a href="/users/logout">Logout</a></li>
+                        {{else}}
+                            <li role="presentation"><a>About</a></li>
+                            <li role="presentation"><a>About</a></li>
+                            <li role="presentation"><a href="/users/login">Login</a></li>
+                            <li role="presentation"><a href="/users/register">Register</a></li>
+                        {{/if}}
+
+
 					</ul>
 				</div>
 			</div>
 		</nav>
     {{{body}}}
-		
-		
+
+
 		<footer class="footer" id="footer">
 			<div class="container-fluid">
 				<div class="row text-center">
@@ -80,13 +89,13 @@
 				</div>
 			</div>
 		</footer>
-		
+
 		<!-- jQuery Version 1.11.1 -->
 		<script src="/javascripts/jquery.js"></script>
-		
+
 		<!-- Bootstrap Core JavaScript -->
 		<script src="/javascripts/bootstrap.min.js"></script>
-		
+
 		<!--Custom Javascript-->
 		<script src="/javascripts/scripts.js"></script>
 	</body>
