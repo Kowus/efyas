@@ -6,15 +6,23 @@ body {
 }
 .navbar-inverse{background-color:#000;border-color:#080808}
 .head{
+	background-color:#080808;
 	margin:0;
 	width:100%;
 	padding: 70px 0 0;
-	background-color:#080808;
-	background-image:url("../images/head-bg.jpg");
+	height:100vh;
+
+	-webkit-animation-name: backgroundMix; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 20s; /* Safari 4.0 - 8.0 */
+	-webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+	animation-name: backgroundMix;
+	animation-duration: 20s;
+	animation-iteration-count: infinite;
+
+	transition: opacity .5s ease-in-out;
 	background-attachment:fixed;
 	background-repeat:no-repeat;
 	background-size:cover;
-	height:100vh;
 }
 .landing-header {
 	color:white;
@@ -200,4 +208,12 @@ textarea:focus{
 		height:300px;
 	}
 
+}
+
+@keyframes backgroundMix {
+	0% {background-image:url("../images/head-bg.jpg");transition: opacity .25s ease-in-out}
+	25% {background-image:url("../images/baby.jpg");transition: opacity .25s ease-in-out}
+	50% {background-image:url("../images/pentax.jpg");transition: opacity .25s ease-in-out}
+	75% {background-image:url("../images/footer.jpg");transition: opacity .25s ease-in-out}
+	100% {background-image:url("../images/flowers.JPG");transition: opacity .25s ease-in-out}
 }

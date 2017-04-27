@@ -16,9 +16,8 @@ var Schema = mongoose.Schema;
 var restaurantSchema = new Schema({
 	username: {
 		type: String,
-		index: true,
-		unique: true,
-		required: true
+		required:true,
+		unique:true
 	},
 	name:     {
 		type:     String,
@@ -28,26 +27,31 @@ var restaurantSchema = new Schema({
 	location: {
 		longitude:   Number,
 		latitude:    Number,
-		description: { type: String, required: true }
+		description: String
 	},
-	items:     [{
+	menu:     [{
 		name:  {
-			type:     String,
-			required: true
+			type:     String
 		},
 		price: {
-			type:     Number,
-			required: true
-		}
+			type:     Number
+		},category:{
+				type: Array
+		}, reviews: [
+			{
+				stars: Number,
+				body:String,
+				author: Schema.Types.ObjectId
+
+			}
+		]
 	}],
 	password: {
 		type: String,
 		required: true
 	},
-	account_group: {
-		type: String,
-		default: "restaurant"
-	}
+	account_type: { type: String,
+default: "restaurant"}
 });
 
 var Restaurant = module.exports = mongoose.model('restaurants', restaurantSchema);
@@ -66,10 +70,13 @@ module.exports.getRestaurantByUsername = function (username, callback) {
 	Restaurant.findOne(query, callback);
 };
 
-module.exports.getRestaurantById = function (id, callback) {
+module.exports.getUserById = function (id, callback) {
 	Restaurant.findById(id, callback);
 };
-
+module.exports.getUserByEmail = function (email, callback) {
+	var query = {email: email};
+	User.findOne(query, callback);
+};
 module.exports.comparePassword = function (candidatePassword, hash, callback) {
 	bcrypt.compare(candidatePassword, hash, function (err, isMatch) {
 		if (err) throw err;

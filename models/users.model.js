@@ -46,9 +46,13 @@ module.exports.createUser = function (newUser, callback) {
     });
 };
 
-module.exports.getUserByUsername = function (username, callback) {
-    var query = {username: username};
+module.exports.getUserByEmail = function (email, callback) {
+    var query = {email: email};
     User.findOne(query, callback);
+};
+module.exports.getUserByUsername = function (username, callback) {
+	var query = {username: username};
+	User.findOne(query, callback);
 };
 
 module.exports.getUserById = function (id, callback) {
@@ -61,9 +65,3 @@ module.exports.comparePassword = function (candidatePassword, hash, callback) {
         callback(null, isMatch);
     });
 };
-
-/*
- module.exports.execTransaction = function (card, callback) {
- var query = {card: card};
- User.update(query, callback);
- };*/

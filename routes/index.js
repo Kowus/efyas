@@ -9,16 +9,26 @@ router.get('/', function(req, res, next) {
 		}
 		else {
 			console.log("loaded restaurantss");
-			res.render('index', { title: 'easy-eat &#174;', rests:results });
+			if(!req.user) {
+				res.render('index', {title: 'easy-eat &#174;', rests: results});
+			}else{
+				res.redirect('/dashboard')
+			}
 		}
 	});
 });
 
 
 router.get('/dashboard', ensureAuthenticated, function (req, res, next) {
-	res.render('user_dash', {
-		title: 'easy-eat &#174;'
-	});
+	if (req.user.account_type === 'user') {
+		res.render('user_dash', {
+			title: 'easy-eat &#174;'
+		});
+	}else if(req.user.account_type === 'restaurant'){
+		res.render('rest_dash',{
+			title: 'easy-eat &#174;'
+		})
+	}
 });
 
 
@@ -26,6 +36,7 @@ function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 	} else {
+		console.log("UNAUTHORIZED ACCESS");
 		res.redirect('/users/login');
 	}
 }

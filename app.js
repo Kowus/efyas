@@ -11,22 +11,22 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
+var User = require('./models/users.model');
 
 mongoose.connect(process.env.MONGODB_URI);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('connected', function () {
-    console.log('Connected to mongoose');
+	console.log('Connected to mongoose');
 });
 db.on('disconnected', function () {
-    console.log('Mongoose connection disconnected');
+	console.log('Mongoose connection disconnected');
 });
 process.on('SIGINT', function () {
-    db.close(function () {
-        console.log('Mongoose connection disconnected on app termination');
-        process.exit(0);
-    });
+	db.close(function () {
+		console.log('Mongoose connection disconnected on app termination');
+		process.exit(0);
+	});
 });
 
 
@@ -65,7 +65,7 @@ app.use(expressValidator({
 			root = namespace.shift(),
 			formParam = root;
 
-		while(namespace.length) {
+		while (namespace.length) {
 			formParam += '[' + namespace.shift() + ']';
 		}
 		return {
@@ -93,20 +93,20 @@ app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+	// render the error page
+	res.status(err.status || 500);
+	res.render('error');
 });
 
 module.exports = app;
