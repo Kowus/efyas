@@ -21,8 +21,7 @@ var restaurantSchema = new Schema({
 	},
 	name:     {
 		type:     String,
-		required: true,
-		unique:   true
+		required: true
 	},
 	location: {
 		longitude:   Number,

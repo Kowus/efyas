@@ -40,8 +40,8 @@
                     <h5>I am a</h5>
 
 
-                        <h5 class="col-sm-4">User <br><input value="user" type="radio" name="account_type" ng-model="account_type"></h5>
-                    <h5 class="col-sm-4">Restaurant/Vendor <br><input value="restaurant" type="radio" name="account_type" ng-model="account_type"></h5>
+                        <h5 class="col-sm-4">User <br><input value="user" type="radio" name="account_type" ng-model="account_type" required></h5>
+                    <h5 class="col-sm-4" required>Restaurant/Vendor <br><input value="restaurant" type="radio" name="account_type" ng-model="account_type"></h5>
                 </fieldset>
                 <fieldset class="form-group">
                     <div class="col-md-6" ng-show="account_type === 'user'">
