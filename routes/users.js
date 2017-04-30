@@ -8,7 +8,6 @@ var Restaurant = require('../models/restaurants.model');
 var OBJ = null;
 
 
-
 router.get('/register', function (req, res, next) {
 	res.render('register', {
 		title: "User Registration"
@@ -16,54 +15,64 @@ router.get('/register', function (req, res, next) {
 });
 router.get('/login', function (req, res, next) {
 	res.render('login', {
-		title:"User Login: easy-eat"
+		title: "User Login: easy-eat"
 	});
 });
 
 router.post('/register', function (req, res, next) {
+	// var errors = [];
+	var newError =[];
+	var tempBool = false;
 	var email = req.body.email;
 	var firstname = req.body.firstname;
 	var lastname = req.body.lastname;
 	var sex = req.body.sex;
 	var phone = req.body.phone;
-	var username = req.body.username.toLowerCase();
-	var password = req.body.password+'a';
-	var password2 = req.body.password2+'a';
-	var account_type = req.body.account_type;
+	var username = req.body.username.trim().toLowerCase();
+	var password = req.body.password + 'a';
+	var password2 = req.body.password2 + 'a';
+	var account_type = req.body.account_type.trim().toLowerCase();
 	var name = req.body.name;
+
 	//Validation
-	if(account_type == 'user') {
+	if (account_type === 'user') {
 		req.checkBody('firstname', 'First Name is required').notEmpty();
 		req.checkBody('lastname', 'Last Name is required').notEmpty();
 		req.checkBody('email', 'Email is required').notEmpty();
 		req.checkBody('email', 'Email not valid').isEmail();
 		req.checkBody('account_type', 'Account type is required').notEmpty();
-		req.checkBody('email', 'This email is already bound to another account').equals(!User.getUserByEmail(email, function (err, data) {return err}));
+		req.checkBody('email', 'This email is already bound to another account').isUniqueEmail(User);
 		req.checkBody('username', 'Username is required').notEmpty();
-		req.checkBody('username','Username already exists').equals(!User.getUserByUsername(username, function (err, data) {return err}));
+		req.checkBody('username', 'Username has been taken').isUniqueUser(User);
+		req.checkBody('username', 'Username already exists');
 		req.checkBody('password', 'Password is required').notEmpty();
 		req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
-	}else{
+		var errors = req.validationErrors();
+
+
+	} else {
 		req.checkBody('name', 'Name of Your Establishment is required').notEmpty();
 		req.checkBody('email', 'Email is required').notEmpty();
 		req.checkBody('email', 'Email not valid').isEmail();
-		req.checkBody('email', 'This email is already bound to another account').equals(!Restaurant.getUserByEmail(email, function (err, data) {return err}));
+		req.checkBody('email', 'This email is already bound to another account').isUniqueEmail(Restaurant);
 		req.checkBody('username', 'Username is required').notEmpty();
-		req.checkBody('username', 'Username has already been taken').equals(!Restaurant.getRestaurantByUsername(username, function (err, data) {return err}));
+		req.checkBody('username', 'Username has been taken').isUniqueUser(Restaurant);
 		req.checkBody('password', 'Password is required').notEmpty();
 		req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
-	}
-	var errors = req.validationErrors();
+		var errors = req.validationErrors();
 
-	if(errors)
-	{
+
+	}
+
+
+
+	if (errors) {
 		res.render('register', {
 			errors: errors,
 			title: 'User Registration'
 		});
-	}else
-	{
-		if(account_type == 'user') {
+	} else {
+		if (account_type == 'user') {
 			var newUser = new User({
 				firstname: firstname,
 				lastname: lastname,
@@ -76,10 +85,10 @@ router.post('/register', function (req, res, next) {
 			});
 
 			User.createUser(newUser, function (err, user) {
-				if (err) throw  err;
+				if (err) console.error(err.toJSON());
 				console.log(user);
 			});
-		}else if(account_type == 'restaurant'){
+		} else if (account_type == 'restaurant') {
 			var newRestaurant = new Restaurant({
 				name: name,
 				email: email,
@@ -89,7 +98,7 @@ router.post('/register', function (req, res, next) {
 				account_type: account_type
 			});
 			Restaurant.createRestaurant(newRestaurant, function (err, restaurant) {
-				if(err) return console.error(err);
+				if (err) return console.error(err);
 				console.log(restaurant)
 			})
 		}
@@ -104,30 +113,26 @@ passport.use(new LocalStrategy(
 	function (username, password, done) {
 		User.getUserByUsername(username, function (err, user) {
 			if (err) throw  err;
-			if(!user)
-			{
+			if (!user) {
 				Restaurant.getRestaurantByUsername(username, function (err, user) {
 					OBJ = Restaurant;
 					if (err) throw  err;
-					if(!user)
-					{
+					if (!user) {
 						return done(null, false, {message: 'Unknown User'});
 					}
 
 					Restaurant.comparePassword(password, user.password, function (err, isMatch) {
-						if(err) throw  err;
-						if(!isMatch)
-						{
+						if (err) throw  err;
+						if (!isMatch) {
 							return done(null, user);
-						}else
-						{
+						} else {
 							return done(null, false, {message: 'Invalid Password'});
 						}
 					});
 				});
 
 				// return done(null, false, {message: 'Unknown User'});
-			}else {
+			} else {
 				OBJ = User;
 				User.comparePassword(password, user.password, function (err, isMatch) {
 					if (err) throw  err;
@@ -142,7 +147,6 @@ passport.use(new LocalStrategy(
 
 	}
 ));
-
 
 
 passport.serializeUser(function (user, done) {

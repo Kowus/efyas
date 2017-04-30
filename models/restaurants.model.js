@@ -45,6 +45,11 @@ var restaurantSchema = new Schema({
 			}
 		]
 	}],
+	email:{
+		type:String,
+		required:true,
+		unique:true
+	},
 	password: {
 		type: String,
 		required: true
@@ -74,7 +79,7 @@ module.exports.getUserById = function (id, callback) {
 };
 module.exports.getUserByEmail = function (email, callback) {
 	var query = {email: email};
-	User.findOne(query, callback);
+	Restaurant.findOne(query, callback);
 };
 module.exports.comparePassword = function (candidatePassword, hash, callback) {
 	bcrypt.compare(candidatePassword, hash, function (err, isMatch) {

@@ -73,6 +73,23 @@ app.use(expressValidator({
 			msg: msg,
 			value: value
 		}
+	}, customValidators: {
+		isUniqueUser: function (value, model) {
+			/*User.getUserByUsername(value, function (err, data) {
+				// if (err) return console.error(err);
+				// return data === null;
+				return [data].length < 1;
+			})*/
+			 return model.findOne({username:value}).length < 1/*.then(function(user) {
+				console.log("Length: "+[user].length.toString());
+				return [user].length < 1;
+			}).catch(function (error) {
+				console.error(error);
+			})*/
+		},
+		isUniqueEmail: function (value, model) {
+			return model.findOne({email:value}).length<1;
+		}
 	}
 }));
 // Connect flash
