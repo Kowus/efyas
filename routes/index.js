@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var Rests = require('../models/restaurants.model'); 
+var Rests = require('../models/restaurants.model');
+
+var restaurants = require('./restaurants');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	Rests.find({}).exec(function (err, results) {
@@ -22,15 +25,18 @@ router.get('/', function(req, res, next) {
 router.get('/dashboard', ensureAuthenticated, function (req, res, next) {
 	if (req.user.account_type === 'user') {
 		res.render('user_dash', {
-			title: 'easy-eat &#174;'
+			title: 'easy-eat &#174;',
+			user :req.user
 		});
 	}else if(req.user.account_type === 'restaurant'){
 		res.render('rest_dash',{
-			title: 'easy-eat &#174;'
+			title: 'easy-eat &#174;',
+			user:req.user
 		})
 	}
 });
 
+router.use('/restaurants', ensureAuthenticated,restaurants);
 
 function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) {
@@ -40,6 +46,8 @@ function ensureAuthenticated(req, res, next) {
 		res.redirect('/users/login');
 	}
 }
+
+
 
 
 

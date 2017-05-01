@@ -1,17 +1,48 @@
+<!--
 <div style="padding-top:70px;" class="container" ng-controller="StoreController as store">
 	<ul class="list-group">
 		<li class="list-group-item" ng-repeat="product in store.products | limitTo:4 | orderBy:'price'" ng-hide="store.product.soldOut">
 			<h3>
 				<product-title></product-title>
-				<!--<img style="object-fit: cover" ng-src="{[{product.images[0].full}]}"
-				     class="img-thumbnail img-responsive center-block" width="250px" height="250px">-->
-				<image-gallery></image-gallery>
+				&lt;!&ndash;<img style="object-fit: cover" ng-src="{[{product.images[0].full}]}"
+				     class="img-thumbnail img-responsive center-block" width="250px" height="250px">&ndash;&gt;
+				&lt;!&ndash;<image-gallery></image-gallery>&ndash;&gt;
+                <img style="object-fit: cover" src="/images/flowers.JPG" width="250px" class="img-thumbnail img-responsive center-block">
 			</h3>
-			<!--<p>{[{product.description}]}</p>-->
+			&lt;!&ndash;<p>{[{product.description}]}</p>&ndash;&gt;
 			<button class="btn btn-default pull-right" ng-show="product.canPurchase"><i class="fa fa-shopping-cart"> </i> Order</button>
 			<product-panels></product-panels>
 
 		</li>
 	</ul>
 
+</div>
+-->
+
+
+
+
+<div class="container" style="padding-top: 70px; height: calc(100vh - 70px)" ng-controller="StoreController as stores">
+    <div  class="row">
+        <ul class="list-group list-unstyled col-md-3 btn-group-vertical">
+            <li class="btn btn-default" ng-repeat="store in stores.products | limitTo: 20 | orderBy: '_id'" ng-bind="store.name" ng-click="stores.setCurrent(stores.products.indexOf(store))">
+            </li>
+            <h1>{[{stores.current}]}</h1>
+        </ul>
+        <div class="col-md-9">
+            <h3>Menu</h3>
+            <hr>
+            <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in stores.products[stores.current].menu" style="width: 100%;">
+                <p class="text-primary" data-toggle="collapse" data-target="#{[{item._id}]}">{[{item.name}]}<small class="pull-right" ng-bind="item.price | currency"></small></p>
+
+                <div id="{[{item._id}]}" class="collapse">
+                    <p ng-bind="item.description"></p>
+                    <button class="btn btn-default col-md-offset-11"><i class="fa fa-shopping-cart"> </i> Order</button>
+                </div>
+
+            </li>
+            </ul>
+        </div>
+    </div>
 </div>

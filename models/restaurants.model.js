@@ -32,6 +32,14 @@ var restaurantSchema = new Schema({
 		name:  {
 			type:     String
 		},
+		soldOut:{
+			type: Boolean,
+			default: false
+		},
+		canPurchase:{
+			type: Boolean,
+			default: true
+		},
 		price: {
 			type:     Number
 		},category:{
@@ -43,7 +51,8 @@ var restaurantSchema = new Schema({
 				author: Schema.Types.ObjectId
 
 			}
-		]
+		],
+		description: String
 	}],
 	email:{
 		type:String,

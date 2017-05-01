@@ -31,7 +31,6 @@ process.on('SIGINT', function () {
 
 
 var index = require('./routes/index');
-var restaurants = require('./routes/restaurants');
 var users = require('./routes/users');
 
 var app = express();
@@ -74,21 +73,15 @@ app.use(expressValidator({
 			value: value
 		}
 	}, customValidators: {
-		isUniqueUser: function (value, model) {
-			/*User.getUserByUsername(value, function (err, data) {
-				// if (err) return console.error(err);
-				// return data === null;
-				return [data].length < 1;
-			})*/
-			 return model.findOne({username:value}).length < 1/*.then(function(user) {
-				console.log("Length: "+[user].length.toString());
-				return [user].length < 1;
-			}).catch(function (error) {
-				console.error(error);
-			})*/
+		isUniqueUser: function (value) {
+			var y = User.findOne({username: value,username:{$exists:true}}).cursor()
+
+			console.log(y.length);
+				return y.length
+
 		},
-		isUniqueEmail: function (value, model) {
-			return model.findOne({email:value}).length<1;
+		isUniqueEmail: function (value) {
+			return User.findOne({email:value}).length === 0;
 		}
 	}
 }));
@@ -105,7 +98,6 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', index);
-app.use('/restaurants', restaurants);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

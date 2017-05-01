@@ -5,9 +5,19 @@
 	});
 	
 	// Store Controller
-	app.controller('StoreController', function () {
-		this.products = gems;
-	});
+	app.controller('StoreController', ['$http', function ($http) {
+
+		this.current = 0;
+		this.products = [];
+		var item = this;
+		$http.get('/restaurants/rest_details').success(function (data) {
+			item.products = data;
+		});
+
+		this.setCurrent = function (newProduct) {
+			this.current = newProduct|| 0;
+		};
+	}]);
 	
 	// Review Controller
 	app.controller('ReviewController', function () {
