@@ -36,9 +36,14 @@
             <li class="list-group-item" ng-repeat="item in stores.products[stores.current].menu" style="width: 100%;">
                 <p class="text-primary" data-toggle="collapse" data-target="#{[{item._id}]}">{[{item.name}]}<small class="pull-right" ng-bind="item.price | currency"></small></p>
 
-                <div id="{[{item._id}]}" class="collapse">
+                <div id="{[{item._id}]}" class="collapse" ng-init="qty = 0">
                     <p ng-bind="item.description"></p>
-                    <button class="btn btn-default col-md-offset-11"><i class="fa fa-shopping-cart"> </i> Order</button>
+                    <div class="form-group form-inline">
+                    <label class=" col-md-4" for="qty">Quantity: <input id="qty" class="form-control" type="number" ng-model="qty" style=" border: none;outline:none;background-color: #fff;color: #000; width: 80px"></label>
+                        <!--<small>Total: {[{qty * item.price | currency}]}</small>-->
+                    <a class="btn btn-default pull-right"><small>Total: {[{qty * item.price | currency}]}</small><br><i class="fa fa-shopping-cart"> </i> Order</a>
+                        <br><br>
+                    </div>
                 </div>
 
             </li>
