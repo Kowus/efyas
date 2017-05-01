@@ -41,9 +41,9 @@ router.post('/register', function (req, res, next) {
 		req.checkBody('email', 'Email is required').notEmpty();
 		req.checkBody('email', 'Email not valid').isEmail();
 		req.checkBody('account_type', 'Account type is required').notEmpty();
-		req.checkBody('email', 'This email is already bound to another account')/*.isUniqueEmail();*/
+		// req.checkBody('email', 'This email is already bound to another account')/*.isUniqueEmail();*/
 		req.checkBody('username', 'Username is required').notEmpty();
-		req.checkBody('username', 'Username has been taken')/*.isUniqueUser();*/
+		// req.checkBody('username', 'Username has been taken')/*.isUniqueUser();*/
 		req.checkBody('username', 'Username already exists');
 		req.checkBody('password', 'Password is required').notEmpty();
 		req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
@@ -54,9 +54,9 @@ router.post('/register', function (req, res, next) {
 		req.checkBody('name', 'Name of Your Establishment is required').notEmpty();
 		req.checkBody('email', 'Email is required').notEmpty();
 		req.checkBody('email', 'Email not valid').isEmail();
-		req.checkBody('email', 'This email is already bound to another account').isUniqueEmail();
+		// req.checkBody('email', 'This email is already bound to another account')/*.isUniqueEmail();*/
 		req.checkBody('username', 'Username is required').notEmpty();
-		req.checkBody('username', 'Username has been taken')/*.isUniqueUser();*/
+		// req.checkBody('username', 'Username has been taken')/*.isUniqueUser();*/
 		req.checkBody('password', 'Password is required').notEmpty();
 		req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 		var errors = req.validationErrors();
