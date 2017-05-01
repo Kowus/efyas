@@ -8,8 +8,8 @@
 			<h3 class="signup-header">Signup</h3>
 			<form method="post" action="/users/register">
                 <fieldset class="form-group form-inline fset">
-                    <h4 class="col-sm-6" style="color: white">User <br><input type="radio" class="form-control" name="account_type" value="user" ng-model="account_type" required selected></h4>
-                    <h4 class="col-sm-6" style="color: white">Vendor<br><input type="radio" class="form-control" name="account_type" value="restaurant" ng-model="account_type" required></h4>
+                    <h4 class="col-sm-6" style="color: white">User <br><input type="radio" name="account_type" value="user" ng-model="account_type" required selected></h4>
+                    <h4 class="col-sm-6" style="color: white">Vendor<br><input type="radio" name="account_type" value="restaurant" ng-model="account_type" required></h4>
                 </fieldset>
 				<fieldset class="form-group form-inline fset">
                     <input type="text" class="form-control" placeholder="Name of Restaurant/Shop" name="name" ng-required="account_type === 'restaurant'" ng-show="account_type === 'restaurant'">
