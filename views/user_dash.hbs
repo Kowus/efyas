@@ -27,7 +27,9 @@
         <ul class="list-group list-unstyled col-md-3 btn-group-vertical">
             <li class="btn btn-default" ng-repeat="store in stores.products | limitTo: 20 | orderBy: '_id'" ng-bind="store.name" ng-click="stores.setCurrent(stores.products.indexOf(store))">
             </li>
-            <!--<h1>{[{stores.current}]}</h1>-->
+            <!--<h1>{[{stores.current}]}</h1>
+            for debugging only
+            -->
         </ul>
         <div class="col-md-9">
             <h3>Menu</h3>
